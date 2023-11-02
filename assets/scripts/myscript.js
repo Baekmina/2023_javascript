@@ -1,15 +1,12 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 
-function add(num1, num2) {
-  const result = num1 + num2;
-  // alert("The result is " + result);
+function add() {
+  currentResult = currentResult + parseInt(userInput.value);
+  // parseInt = 소숫점 자리가 없는 숫자 (정수)
+  // parseFloat = 소숫점 자리가 있는 숫자
 
-  return result;
+  outputResult(currentResult, "");
 }
 
-currentResult = add(1, 2);
-
-let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - 1`;
-
-outputResult(currentResult, calculationDescription);
+addBtn.addEventListener("click", add);
