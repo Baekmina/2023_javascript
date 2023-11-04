@@ -1,6 +1,7 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 
+// 코드가 많거나 공유하려는 로직이 여러 줄일 때 사용하면 좋은 방법
 function getUserNumberInput() {
   return parseInt(userInput.value);
 }
