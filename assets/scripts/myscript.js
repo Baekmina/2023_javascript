@@ -1,7 +1,9 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 
-// 코드가 많거나 공유하려는 로직이 여러 줄일 때 사용하면 좋은 방법
+// array (데이터 목록 관리를 위해 사용)
+let logEntries = [];
+
 function getUserNumberInput() {
   return parseInt(userInput.value);
 }
@@ -12,17 +14,16 @@ function createAndWriteOutput(operator, resultBeforCalc, calcNumber) {
 }
 
 function add() {
-  // 반복된 코드를 함수 선언을 통해 줄일 것.
-  // const enterrNumber = parseInt(userInput.value);
-
   const enterrNumber = getUserNumberInput();
   const initialResult = currentResult;
-  currentResult += enterrNumber; // currentResult = currentResult + enterrNumber;
+  currentResult += enterrNumber;
   createAndWriteOutput("+", initialResult, enterrNumber);
 
-  // parseInt = 소숫점 자리가 없는 숫자 (정수) & +userInput.value
-  // parseFloat = 소숫점 자리가 있는 숫자
-  // toString = 숫자를 문자열로 변환 (잘 사용안함)
+  // 배열에 새로운 요소 추가
+  logEntries.push(enterrNumber);
+
+  // 배열의 특정 값 가져오기 (요소 뒤 인덱스 값 첨부)
+  console.log(logEntries[0]);
 }
 
 function subtract() {
