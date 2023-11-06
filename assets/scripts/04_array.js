@@ -1,6 +1,7 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 
+// array (데이터 목록 관리를 위해 사용)
 let logEntries = [];
 
 function getUserNumberInput() {
@@ -18,15 +19,11 @@ function add() {
   currentResult += enterrNumber;
   createAndWriteOutput("+", initialResult, enterrNumber);
 
-  // object (데이터를 함께 묵어 그룹화하는데에 사용)
-  const logEntry = {
-    operation: "ADD",
-    prevResult: initialResult,
-    number: enterrNumber,
-    result: currentResult,
-  };
-  logEntries.push(logEntry);
-  console.log(logEntries);
+  // 배열에 새로운 요소 추가
+  logEntries.push(enterrNumber);
+
+  // 배열의 특정 값 가져오기 (요소 뒤 인덱스 값 첨부)
+  console.log(logEntries[0]);
 }
 
 function subtract() {
