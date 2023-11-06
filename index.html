@@ -10,6 +10,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles/app.css" />
+    <!-- defer: HTML 구문 분석이 끝난 후에 스크립트가 실행되게 하는 것 -->
+    <!-- async: HTML 구분 분석 전 스크립트를 빠르게 실행 (백그라운드에 일부 데이터만 전송할 때 사용)  -->
+    <script src="assets/scripts/vendor.js" defer></script>
+    <script src="assets/scripts/myscript.js" defer></script>
   </head>
   <body>
     <header>
@@ -29,7 +33,5 @@
       <h2 id="current-calculation">0</h2>
       <h2>Result: <span id="current-result">0</span></h2>
     </section>
-    <script src="assets/scripts/vendor.js"></script>
-    <script src="assets/scripts/myscript.js"></script>
   </body>
 </html>
