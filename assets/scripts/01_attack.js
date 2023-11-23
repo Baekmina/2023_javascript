@@ -1,25 +1,17 @@
 //  게임의 전역 값의 경우 대문자로 처리 (단어 구분할 때는 언더 스코어 _)
 const ATTACK_VALUE = 10;
-const STRONG_ATTACK_VALUE = 17;
 const MONSTER_ATTACK_VALUE = 14;
 
 // max health
 let chosenMaxLife = 100;
+
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 
 adjustHealthBars(chosenMaxLife);
 
-// repeat function
-function attackMonster(mode) {
-  let maxDamage;
-
-  if (mode === "ATTACK") {
-    maxDamage = ATTACK_VALUE;
-  } else if (mode === "STRONG_ATTACK") {
-    maxDamage = STRONG_ATTACK_VALUE;
-  }
-
+// attack
+function attackHandler() {
   // Monster Damage
   const damage = dealMonsterDamage(ATTACK_VALUE);
   currentMonsterHealth -= damage;
@@ -37,15 +29,4 @@ function attackMonster(mode) {
   }
 }
 
-// attack
-function attackHandler() {
-  attackMonster("ATTACK");
-}
-
-// strong attack
-function strongAttackHandler() {
-  attackMonster("STRONG_ATTACK");
-}
-
 attackBtn.addEventListener("click", attackHandler);
-strongAttackBtn.addEventListener("click", strongAttackHandler);
