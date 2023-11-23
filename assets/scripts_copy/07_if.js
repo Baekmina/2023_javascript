@@ -41,7 +41,7 @@ function calculateResult(calculationType) {
     return;
   }
 
-  // OR 연산자 (||) : 하위 조건문 중 하나가 참이라면 모두 참을 반환
+  // OR 연산자 (||) : 하위 조건문 중 적어도 하나가 참이라면 모두 참을 반환
   // if (
   //   calculationType === "ADD" ||
   //   calculationType === "SUBTRACT" ||
