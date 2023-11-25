@@ -288,27 +288,40 @@ function printLogHandler() {
   // }
 
   // break 반복문 제어 (함수의 실행을 중단시켜줌)
-  let i = 0;
-  for (const logEntry of battleLog) {
-    if ((!lastLoggedEntry && lastLoggedEntry !== 0) || lastLoggedEntry < i) {
-      console.log(`#${i}`);
-      for (const key in logEntry) {
-        console.log(`${key} => ${logEntry[key]}`);
-      }
-      lastLoggedEntry = i;
-      break;
-    }
-    i++;
-  }
+  // let i = 0;
+  // for (const logEntry of battleLog) {
+  //   if ((!lastLoggedEntry && lastLoggedEntry !== 0) || lastLoggedEntry < i) {
+  //     console.log(`#${i}`);
+  //     for (const key in logEntry) {
+  //       console.log(`${key} => ${logEntry[key]}`);
+  //     }
+  //     lastLoggedEntry = i;
+  //     break;
+  //   }
+  //   i++;
+  // }
 
   // continue (함수 실행을 중단시키는 것이 아닌 다음 실행으로 넘어가는 것)
   // 3만 보이지 않음. 0, 1, 2, 4, 5 출력
-  for (let i = 0; i < 5; i++) {
-    if (i === 3) {
-      continue;
+  // for (let i = 0; i < 5; i++) {
+  //   if (i === 3) {
+  //     continue;
+  //   }
+  //   console.log(i);
+  // }
+
+  // 레이블 문장으로 제어하기 (많이 사용되는 기능 X)
+  let j = 0;
+  outerWhile: do {
+    console.log("Outer", j);
+    innerfor: for (let k = 0; k < 5; k++) {
+      if (k === 3) {
+        // console.log('Inner', k)
+        break outerWhile; //외부 문장 중단하기
+      }
     }
-    console.log(i);
-  }
+    j++;
+  } while (j < 3);
 
   // console.log(battleLog);
 }
