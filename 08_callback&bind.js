@@ -33,7 +33,7 @@ const showResult = (messageText, result) => {
   alert(messageText + " " + result);
 };
 
-// bind = 새로운 함수를 생성해줌
+// bind = 함수의 인자를 '사전 구성' 하려는 상황에서 함수를 직접 호출하지 않을 때
 combine(
   showResult.bind(this, "The result after adding all numbers is: "),
   "ADD",
