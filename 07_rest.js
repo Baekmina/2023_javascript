@@ -1,6 +1,6 @@
 // not related to game
 
-// Rest 매개 변수 (... => 기존의 것을 가져옴)
+// Rest 매개 변수 (매개 변수들을 하나의 배열로 합쳐주는 역할 / 기존의 것들을 가져옴)
 // 항상 마지막 인자여야함 (...numbers, a => error)
 const sumUp = (a, b, ...numbers) => {
   let sum = 0;
