@@ -12,7 +12,15 @@ const backdrop = document.getElementById("backdrop");
 // const backdrop = document.body.firstElementChild;
 
 // cancel
-const CancelAddMovieButton = addMovieModal.querySelector(".btn--passive");
+const cancelAddMovieButton = addMovieModal.querySelector(".btn--passive");
+
+// add
+const confirmAddMovieButton = cancelAddMovieButton.nextElementSibling;
+// const confirmAddMovieButton = addMovieModal.querySelector(".btn--success");
+
+// input
+const userInputs = addMovieModal.querySelectorAll("input");
+// const userInputs = addMovieModal.getElementsByTagName('input')
 
 const toggleBackdrop = () => {
   backdrop.classList.toggle("visible");
@@ -23,8 +31,26 @@ const toggleMovieModal = () => {
   toggleBackdrop();
 };
 
-const CancleAddMovie = () => {
+const cancelAddMovieHandler = () => {
   toggleMovieModal();
+};
+
+const addMovieHandler = () => {
+  const titleValue = userInputs[0].value;
+  const imageUrlValue = userInputs[1].value;
+  const ratingValue = userInputs[2].value;
+
+  // trim = 입력값의 시작 및 끝에 있는 불필요한 공백을 제거해줌
+  if (
+    titleValue.trim() === "" ||
+    imageUrlValue.trim() === "" ||
+    ratingValue.trim() === "" ||
+    +ratingValue < 1 ||
+    +ratingValue > 5
+  ) {
+    alert("Please enter valid valus (rating between 1 and 5).");
+    return;
+  }
 };
 
 const backdropClickHandler = () => {
@@ -33,4 +59,5 @@ const backdropClickHandler = () => {
 
 startAddMovieButton.addEventListener("click", toggleMovieModal);
 backdrop.addEventListener("click", backdropClickHandler);
-CancelAddMovieButton.addEventListener("click", CancleAddMovie);
+cancelAddMovieButton.addEventListener("click", cancelAddMovieHandler);
+confirmAddMovieButton.addEventListener("click", addMovieHandler);
