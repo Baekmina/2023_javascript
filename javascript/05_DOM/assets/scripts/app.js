@@ -22,6 +22,9 @@ const confirmAddMovieButton = cancelAddMovieButton.nextElementSibling;
 const userInputs = addMovieModal.querySelectorAll("input");
 // const userInputs = addMovieModal.getElementsByTagName('input')
 
+// new movies
+const movies = [];
+
 const toggleBackdrop = () => {
   backdrop.classList.toggle("visible");
 };
@@ -31,8 +34,17 @@ const toggleMovieModal = () => {
   toggleBackdrop();
 };
 
+const clearMovieInput = () => {
+  // userInputs 상수에 저장된 요소를 사용해 값을 삭제함
+  for (const userInput of userInputs) {
+    // userInputs의 모든 userInput을 거치게 만들어서 모든 사용자 입력 요소 반복
+    userInput.value = "";
+  }
+};
+
 const cancelAddMovieHandler = () => {
   toggleMovieModal();
+  clearMovieInput();
 };
 
 const addMovieHandler = () => {
@@ -51,6 +63,17 @@ const addMovieHandler = () => {
     alert("Please enter valid valus (rating between 1 and 5).");
     return;
   }
+
+  const newMovie = {
+    title: titleValue,
+    image: imageUrlValue,
+    rating: ratingValue,
+  };
+
+  movies.push(newMovie);
+  console.log(movies);
+  toggleMovieModal();
+  clearMovieInput();
 };
 
 const backdropClickHandler = () => {
