@@ -29,6 +29,11 @@ const deleteMovieModal = document.getElementById("delete-modal");
 // new movies
 const movies = [];
 
+const toggleBackdrop = () => {
+  // toggle = class 값이 있는지 체크하고 없으면 추가, 있으면 제거
+  backdrop.classList.toggle("visible");
+};
+
 const updateUI = () => {
   if (movies.length === 0) {
     entryTextSection.style.display = "block";
@@ -37,10 +42,15 @@ const updateUI = () => {
   }
 };
 
-const deleteMovie = (moviedId) => {
+const closeMovieDeletionModal = () => {
+  toggleBackdrop();
+  deleteMovieModal.classList.remove("visible");
+};
+
+const deleteMovieHandler = (movieId) => {
   let movieIndex = 0;
   for (const movie of movies) {
-    if (movie.id === moviedId) {
+    if (movie.id === movieId) {
       break;
     }
     movieIndex++;
@@ -50,18 +60,34 @@ const deleteMovie = (moviedId) => {
   const listRoot = document.getElementById("movie-list");
   listRoot.children[movieIndex].remove();
   // listRoot.removeChild(listRoot.children[movieIndex]);
+  closeMovieDeletionModal();
+  updateUI();
 };
 
-const closeMovieDeletionModal = () => {
-  toggleBackdrop();
-  deleteMovieModal.classList.remove("visible");
-};
-
-const deleteMovieHandler = (moviedId) => {
+const startDeleteMovieHandler = (movieId) => {
   // 이 모달은 실행 시 보이지 않기 때문에 제거하면 안됨 => toggle(X), add(O)
   deleteMovieModal.classList.add("visible");
   toggleBackdrop();
-  // deleteMovie(moviedId)
+
+  const cancelDeletionButton = deleteMovieModal.querySelector(".btn--passive");
+  // const confirmDeletionButton = deleteMovieModal.querySelector(".btn--danger");
+  let confirmDeletionButton = deleteMovieModal.querySelector(".btn--danger");
+
+  // 복제 노드(cloneNode)를 대체하기(replaceWith)
+  confirmDeletionButton.replaceWith(confirmDeletionButton.cloneNode(true));
+  confirmDeletionButton = deleteMovieModal.querySelector(".btn--danger");
+
+  // confirmDeletionButton.removeEventListener(
+  //   "click",
+  //   deleteMovieHandler.bind(null, movieId)
+  // );
+  cancelDeletionButton.removeEventListener("click", closeMovieDeletionModal); // will not work
+
+  cancelDeletionButton.addEventListener("click", closeMovieDeletionModal);
+  confirmDeletionButton.addEventListener(
+    "click",
+    deleteMovieHandler.bind(null, movieId)
+  );
 };
 
 const renderNewMovieElement = (id, title, imageUrl, rating) => {
@@ -77,16 +103,16 @@ const renderNewMovieElement = (id, title, imageUrl, rating) => {
     </div>
   `;
   // bind = 실행된 함수에서 받게될 인자를 미리 구성
-  newMovieElement.addEventListener("click", deleteMovieHandler.bind(null, id));
+  newMovieElement.addEventListener(
+    "click",
+    startDeleteMovieHandler.bind(null, id)
+  );
   const listRoot = document.getElementById("movie-list");
   listRoot.append(newMovieElement);
 };
 
-const toggleBackdrop = () => {
-  backdrop.classList.toggle("visible");
-};
-
 const closeMovieModal = () => {
+  // remove = class 이름을 삭제
   addMovieModal.classList.remove("visible");
 };
 
@@ -105,6 +131,7 @@ const clearMovieInput = () => {
 
 const cancelAddMovieHandler = () => {
   closeMovieModal();
+  toggleBackdrop();
   clearMovieInput();
 };
 
@@ -149,6 +176,7 @@ const addMovieHandler = () => {
 const backdropClickHandler = () => {
   closeMovieModal();
   closeMovieDeletionModal();
+  clearMovieInput();
 };
 
 startAddMovieButton.addEventListener("click", showMovieModal);
