@@ -18,4 +18,8 @@ console.log(sortedPrices);
 const filteredArray = prices.filter((price, idx, prices) => {
   return price > 6; // true, false로 반환하기 때문에 false는 모두 삭제됨.
 });
+
+// 화살표 함수로 짧게 표현하기
+// const filteredArray = prices.filter(price => price > 6)
+
 console.log(filteredArray);
